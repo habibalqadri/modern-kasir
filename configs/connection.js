@@ -1,4 +1,5 @@
 const mysql = require("mysql2");
+const util = require("util");
 
 //konfigurasi database
 const connection = mysql.createConnection({
@@ -8,6 +9,9 @@ const connection = mysql.createConnection({
   database: "pos_db",
 });
 
+//agar query dapat berjalan secara synchronous maka ditambahkan promisify
+connection.query = util.promisify(connection.query).bind(connection);
+
 connection.connect((err) => {
   if (err) {
     console.log("err");
@@ -15,4 +19,5 @@ connection.connect((err) => {
 
   console.log("Connected");
 });
+
 module.exports = connection;

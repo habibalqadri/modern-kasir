@@ -16,6 +16,12 @@ app.get("/", (req, res) => {
 //   res.send("berhasil ngepost");
 // });
 
+//import product router
+const products = require("./routers/products");
+
+//memakai resource products
+app.use("/products", products);
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

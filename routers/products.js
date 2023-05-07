@@ -1,14 +1,16 @@
 const express = require("express");
 const products = express.Router();
-const db = require("../config/connection");
-const { getProducts, createProduct } = require("../controllers/products");
+const { getProduct, createProduct } = require("../controllers/products");
 
+//funtion untuk get semua list produk
 products.route("/").get(async (req, res) => {
-  res.send(await getProducts());
+  res.send(await getProduct());
 });
 
-products.route("/create").post(async (req, res) => {
+//function untuk create produk
+products.route("/").post(async (req, res) => {
   const { name, price, stock } = req.body;
+
   const data = {
     name,
     price,
